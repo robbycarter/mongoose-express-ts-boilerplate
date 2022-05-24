@@ -3,7 +3,7 @@ import { Response, NextFunction } from "express";
 import request from "Request";
 import Payload from "Payload";
 
-export const generateAuthToken = (payload: Payload) => {
+export const generateAuthToken = (payload: Payload): Promise<{ token: string }> => {
   return new Promise(async (resolve, reject) => {
     try {
       jwt.sign(
@@ -23,7 +23,7 @@ export const generateAuthToken = (payload: Payload) => {
   })
 }
 
-export const validateAuthToken = (token: string) => {
+export const validateAuthToken = (token: string): Promise<Payload> => {
   return new Promise(async (resolve, reject) => {
     try {
       const payload: Payload | any = jwt.verify(token, process.env.JWT_SECRET)
@@ -54,7 +54,7 @@ export const getAuthToken = async (req: request, res: Response, next: NextFuncti
 
     token = token.slice(7, token.length);
 
-    const payload:Payload = await module.exports.validateAuthToken(token)
+    const payload: Payload = await module.exports.validateAuthToken(token)
 
     req.userId = payload.userId
 
