@@ -3,7 +3,9 @@ import app from "../../../server";
 import UserModal, { IUser } from "../../../app/models/User";
 import mongoose from "mongoose";
 
-describe('/api/user', () => {
+
+
+describe.skip('/api/user', () => {
   let user: any;
 
   beforeEach(async () => {
@@ -21,6 +23,16 @@ describe('/api/user', () => {
     mongoose.connection.close()
   });
 
+  beforeAll(done => {
+    done()
+  })
+
+  afterAll(done => {
+    // Closing the DB connection allows Jest to exit successfully.
+    mongoose.connection.close()
+    done()
+  })
+
 
   describe('POST /register', () => {
 
@@ -30,12 +42,8 @@ describe('/api/user', () => {
 
       const res = await request(app).post('/api/user/register').send(userAuth)
 
-      const reqData = JSON.parse(JSON.stringify(res)).req;
-      
-      console.log(res.body)
-
       expect(res.status).toEqual(200);
-      // expect(res.body).toHaveProperty('token');
+      expect(res.body).toHaveProperty('token');
     })
 
   })

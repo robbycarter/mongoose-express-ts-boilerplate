@@ -48,7 +48,7 @@ userRouter.post("/register", async (req: Request, res: Response, next: NextFunct
     };
 
     const token = await generateAuthToken(payload)
-    console.log("token created")
+    
     return res.send(token)
   } catch (err) {
     next(err)

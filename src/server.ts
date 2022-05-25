@@ -52,14 +52,14 @@ app.use(express.urlencoded({ extended: false }));
 /**
  * Set render engine and views path
  */
- app.set('view engine', 'pug');
- app.set('views', "./dist/app/views");
+app.set('view engine', 'pug');
+app.set('views', "./dist/app/views");
 
 /**
  * Start Express server.
  */
 const port = process.env.PORT || 5000
-export const server = app.listen(port, () =>
+app.listen(port, async () =>
   console.log(`Server started on port ${port}`)
 );
 
