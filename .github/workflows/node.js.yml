@@ -11,10 +11,10 @@ on:
 
 env:
   ## Sets environment variable
-  MONGODB_URL: ${{secrets.MONGODB_URL}}
-  PORT: ${{secrets.PORT}}
-  JWT_SECRET: ${{secrets.JWT_SECRET}}
-  JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}
+  MONGODB_URL: '${{secrets.MONGODB_URL}}'
+  PORT: '${{secrets.PORT}}'
+  JWT_SECRET: '${{secrets.JWT_SECRET}}'
+  JWT_EXPIRATION: '${{secrets.JWT_EXPIRATION}}'
   
   
 jobs:
@@ -34,7 +34,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: echo ${{secrets.JWT_EXPIRATION}} | "set"
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
