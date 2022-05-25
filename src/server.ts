@@ -59,8 +59,8 @@ app.use(express.urlencoded({ extended: false }));
  * Start Express server.
  */
 const port = process.env.PORT || 5000
-const server = app.listen(port, () =>
+export const server = app.listen(port, () =>
   console.log(`Server started on port ${port}`)
 );
 
-export default server;
+export default app;

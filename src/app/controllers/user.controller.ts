@@ -1,7 +1,7 @@
 import { Router, Response, NextFunction } from "express";
 
 // Modals
-import User from "../models/User";
+import UserModal from "../models/User";
 
 // Types
 import Payload from "Payload";
@@ -28,7 +28,7 @@ userRouter.post("/register", async (req: Request, res: Response, next: NextFunct
     const { email, password } = await UserSignupValidator(req.body)
 
 
-    let user: IUser = await User.findOne({ email });
+    let user: IUser = await UserModal.findOne({ email });
 
     if (user) {
       let e = new Error("User Already Exist");
@@ -37,7 +37,7 @@ userRouter.post("/register", async (req: Request, res: Response, next: NextFunct
     }
 
     // Build user object based on IUser
-    user = new User({ email });
+    user = new UserModal({ email });
 
     user.password = user.hashPassword(password)
 
@@ -65,7 +65,7 @@ userRouter.post("/login", async (req: Request, res: Response, next: NextFunction
     const { email, password } = await UserSignInValidator(req.body)
 
 
-    let user: IUser = await User.findOne({ email });
+    let user: IUser = await UserModal.findOne({ email });
 
     if (!user) {
       let e = new Error("User Account Not Found");
@@ -103,7 +103,7 @@ userRouter.get("/profile", getAuthToken, async (req: Request, res: Response, nex
 
     const { userId } = req;
 
-    const user: IUser = await User.findById(userId).select({ password: 0 })
+    const user: IUser = await UserModal.findById(userId).select({ password: 0 })
 
     if (!user) {
       let e = new Error("User Profile Not Found");
@@ -130,7 +130,7 @@ userRouter.get("/profile", getAuthToken, async (req: Request, res: Response, nex
 userRouter.get("/users", getAuthToken, async (req: Request, res: Response, next: NextFunction) => {
   try {
 
-    const users: IUser[] = await User.find().select({ password: 0 })
+    const users: IUser[] = await UserModal.find().select({ password: 0 })
 
     if (users.length == 0) {
       let e = new Error("User Profile Not Found");

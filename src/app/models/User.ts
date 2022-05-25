@@ -39,6 +39,6 @@ userSchema.methods.comparePassword = (password: string, hash: string) => {
   return compareSync(password, hash)
 }
 
-const User = model<IUser>("User", userSchema);
+const UserModal = model<IUser>("User", userSchema);
 
-export default User;
+export default UserModal;
