@@ -1,5 +1,5 @@
 import request from "supertest";
-import app, { server } from "../../../server";
+import app from "../../../server";
 import UserModal, { IUser } from "../../../app/models/User";
 import mongoose from "mongoose";
 
@@ -17,7 +17,7 @@ describe('/api/user', () => {
 
   afterEach(async () => {
     await UserModal.deleteMany({});
-    await server.close();
+    //await server.close();
     mongoose.connection.close()
   });
 
