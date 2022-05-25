@@ -7,15 +7,6 @@ export const indexRouter = Router();
  * Home page.
  */
 indexRouter.get('/', (req: Request, res: Response) => {
-  res.render('index', {
-    title: 'index',
-    message: 'hello world'
-  });
+  res.send("Hello World")
 });
 
-indexRouter.all('*', (req: Request, res: Response) => {
-  res.render('index', {
-    title: 'index',
-    message: 'hello world'
-  });
-});
